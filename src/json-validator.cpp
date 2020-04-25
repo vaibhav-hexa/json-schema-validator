@@ -1103,6 +1103,9 @@ std::shared_ptr<schema> type_schema::make(json &schema,
 	case json::value_t::array:
 		return std::make_shared<array>(schema, root, uris);
 
+#if (NLOHMANN_JSON_VERSION_MAJOR * 10000 + NLOHMANN_JSON_VERSION_MINOR * 100 + NLOHMANN_JSON_VERSION_PATCH) >= 30800
+	case json::value_t::binary:
+#endif
 	case json::value_t::discarded: // not a real type - silence please
 		break;
 	}
